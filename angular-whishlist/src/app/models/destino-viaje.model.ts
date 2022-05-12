@@ -1,9 +1,27 @@
-export class DestinoViaje{
-    nombre: string;
-    url: string;
+import * as uuid from 'uuid';
 
-    constructor(nombre: string, url: string){
-        this.nombre = nombre;
-        this.url = url;
+export class DestinoViaje{
+    id: string = uuid.v4();
+    private selected: boolean = false;
+    public servicios: string[];
+
+    constructor(public nombre: string, public url: string, public votes: number = 0){
+        this.servicios = ['desayuno', 'sauna', 'spa'];
+    }
+
+    isSelected(): boolean {
+        return this.selected;
+    }
+
+    setSelected(selected: boolean) {
+        this.selected = selected;
+    }
+
+    voteUp() {
+        this.votes++;
+    }
+
+    voteDown() {
+        this.votes--;
     }
 }
