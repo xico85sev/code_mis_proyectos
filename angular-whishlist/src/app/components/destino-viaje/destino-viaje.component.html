@@ -1,4 +1,4 @@
-<div class="card-content">
+<div class="card-content" [@esFavorito]="destino.isSelected() ? 'estadoFavorito' : 'estadoNoFavorito'">
     <div class="card-img">
         <!-- <img src="https://placeimg.com/380/230/nature" alt=""> -->
         <img src="{{destino.url}}" alt="">
@@ -16,12 +16,16 @@
             </li>
         </ul>
         <div>
-            <a href="#" (click)="voteUp()"><i class="material-icons md-18">thumb_up</i></a>&nbsp;
-            <a href="#" (click)="voteDown()"><i class="material-icons md-18">thumb_down</i></a>&nbsp;
+            <a href="#" (click)="voteUp()" appTrackearClick data-trackear-tags="destino_vote_up lista_destinos_item">
+                <i class="material-icons md-18">thumb_up</i></a>&nbsp;
+            <a href="#" (click)="voteDown()" appTrackearClick data-trackear-tags="destino_vote_down lista_destinos_item">
+                <i class="material-icons md-18">thumb_down</i></a>&nbsp;
             <span>Votos: {{destino.votes}} </span>
         </div>
         <hr>
-        <a href="#" class="btn-card" (click)="ir()">Ir</a>
+        <a href="#" class="btn-card" (click)="ir()"
+            appTrackearClick data-trackear-tags="destino_elegir_preferido lista_destinos_item"
+        >Ir</a>
         <!-- <span [style.display]="destino.isSelected() ? '' : 'none'">- PREFERIDO -</span> -->
         <span *ngIf="destino.isSelected()">
            <span ngNonBindable>- PREFERIDO -</span>

@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, Injectable, InjectionToken, NgModule } from '@angular/core';
+import { APP_INITIALIZER, Injectable, InjectionToken, ModuleWithProviders, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes} from '@angular/router';
 import { AppComponent } from './app.component';
@@ -26,6 +26,10 @@ import { DestinoViaje } from './models/destino-viaje.model';
 import { TranslateLoader } from '@ngx-translate/core';
 import { from, Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
+import { NgxMapboxGLModule, MAPBOX_API_KEY } from 'ngx-mapbox-gl';  //fallo al importar el modulo
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EspiameDirective } from './espiame.directive';
+import { TrackearClickDirective } from './trackear-click.directive'
 
 // app config
 
@@ -171,6 +175,10 @@ function HttpLoaderFactory(http: HttpClient) {
 
 //fin i18n
 
+export interface IMyLibMapModuleConfig {
+  mapboxToken: string;
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -183,7 +191,9 @@ function HttpLoaderFactory(http: HttpClient) {
     VuelosComponentComponent,
     VuelosMainComponentComponent,
     VuelosMasInfoComponentComponent,
-    VuelosDetalleComponentComponent
+    VuelosDetalleComponentComponent,
+    EspiameDirective,
+    TrackearClickDirective
   ],
   imports: [
     BrowserModule,
@@ -200,7 +210,9 @@ function HttpLoaderFactory(http: HttpClient) {
         useFactory: (HttpLoaderFactory),
         deps: [HttpClient]
       }
-    })
+    }),
+    NgxMapboxGLModule, //falla al importar
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
@@ -212,4 +224,5 @@ function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
