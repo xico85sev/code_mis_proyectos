@@ -4,7 +4,7 @@ jobs:
     working_directory: ~/myapp/angular-whishlist
     docker:
       - image: circleci/node:8-browsers
-    steps:
+    Steps:
       - checkout:
         path: ~/myapp
       - restore_cache:
